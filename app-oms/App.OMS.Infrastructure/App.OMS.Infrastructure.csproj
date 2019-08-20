@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
+    <ProjectReference Include="..\..\app-base\App.Base.Infrastructure\App.Base.Infrastructure.csproj" />
+    <ProjectReference Include="..\App.OMS.Domain\App.OMS.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.4" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AggregateModels\UserAggregate\IOrganizationTreeRepository.cs" />
+    <Compile Remove="AggregateModels\UserAggregate\OrganizationTree.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hashids.net" Version="1.2.2" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

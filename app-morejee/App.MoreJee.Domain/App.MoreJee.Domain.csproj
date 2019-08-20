@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AggregateModels\CategoryAggregate\CategoryRegistry.cs" />
+    <Compile Remove="AggregateModels\CategoryAggregate\ICategoryRegistryRepository.cs" />
+    <Compile Remove="Events\CategoryEvents\CategoryCreatedEvent.cs" />
+    <Compile Remove="Events\CategoryEvents\CategoryUpdatedEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Events\CategoryEvents\" />
+    <Folder Include="Events\ClientAssetEvents\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

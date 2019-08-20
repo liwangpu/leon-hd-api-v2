@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.2\App.API.Description.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.2\App.API.Description.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Commands\Accounts\AccountBatchDeleteCommandHandler.cs" />
+    <Compile Remove="Application\Commands\Accounts\AccountDeleteCommandHandler.cs" />
+    <Compile Remove="Application\Commands\Accounts\AccountUpdateCommand.cs" />
+    <Compile Remove="Application\Commands\Accounts\AccountUpdateCommandHandler.cs" />
+    <Compile Remove="Application\Commands\Organizations\OrganizationBatchDeleteCommandHandler.cs" />
+    <Compile Remove="Application\Commands\Organizations\OrganizationUpdateCommand.cs" />
+    <Compile Remove="Application\Commands\Organizations\OrganizationUpdateCommandHandler.cs" />
+    <Compile Remove="Application\Commands\UserRoles\UserRoleBatchDeleteCommand.cs" />
+    <Compile Remove="Application\Commands\UserRoles\UserRoleBatchDeleteCommandHandler.cs" />
+    <Compile Remove="Application\Commands\UserRoles\UserRoleCreateCommand.cs" />
+    <Compile Remove="Application\Commands\UserRoles\UserRoleCreateCommandHandler.cs" />
+    <Compile Remove="Application\DomainEventHandlers\Users\AddAccountToOrganization.cs" />
+    <Compile Remove="Application\DomainEventHandlers\Users\AddOganizationOwnerDefaultRole.cs" />
+    <Compile Remove="Application\DomainEventHandlers\Users\CreateOrganizationTreeNode.cs" />
+    <Compile Remove="Application\DomainEventHandlers\Users\UpdateOrganizationTreeNode.cs" />
+    <Compile Remove="Application\Queries\PagingQueryRequest.cs" />
+    <Compile Remove="Application\Queries\PagingQueryResult.cs" />
+    <Compile Remove="Application\Validations\Users\AccountUpdateValidator.cs" />
+    <Compile Remove="Application\Validations\Users\OrganizationUpdateValidator.cs" />
+    <Compile Remove="Controllers\PermissionsController.cs" />
+    <Compile Remove="Infrastructure\Extensions\QueryableExtension.cs" />
+    <Compile Remove="Infrastructure\Libraries\DapperSqlBuilder.cs" />
+    <Compile Remove="Infrastructure\Services\UserManagedAccountService.cs" />
+    <Compile Remove="Infrastructure\Services\UserManagedOrganizationService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.2.0" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="NLog" Version="4.6.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\app-base\App.Base.API\App.Base.API.csproj" />
+    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
+    <ProjectReference Include="..\App.Basic.Domain\App.Basic.Domain.csproj" />
+    <ProjectReference Include="..\App.Basic.Infrastructure\App.Basic.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Commands\UserRoles\" />
+    <Folder Include="Application\Queries\Permissions\" />
+    <Folder Include="Infrastructure\Filters\" />
+    <Folder Include="Infrastructure\MiddleWares\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1Development_1json__JSONSchema="http://json.schemastore.org/babelrc" /></VisualStudio></ProjectExtensions>
+
+</Project>

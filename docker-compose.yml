@@ -1,0 +1,200 @@
+version: '3.4'
+
+services:
+
+# 1. app infrastructure
+# 1.1 postgres db
+  app-infrastructure-database:
+    container_name: app-infrastructure-database-c
+    image: postgres:10.5
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-database:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=${PostgresDB_User}
+      - POSTGRES_PASSWORD=${PostgresDB_Password}
+    ports:
+      - "9501:5432"
+    networks:
+      - appdebuggingnet
+    restart: always
+# 1.2 consul
+  app-infrastructure-consul:
+    image: consul:1.4.4
+    container_name: app-infrastructure-consul-c
+    command: agent -dev -client=0.0.0.0 -bind=0.0.0.0
+    ports:
+      - "9502:8500"
+    networks:
+      - appdebuggingnet
+    restart: always
+# 1.3 APIGateway
+  app-infrastructure-apigateway:
+    container_name: app-infrastructure-apigateway-c
+    image: app-infrastructure-apigateway:latest
+    build:
+      context: .
+      dockerfile: app-infrastructure/App.Infrastructure.APIGateway/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-infrastructure-apigateway/logs:/app/logs"
+    ports:
+      - "9503:80"
+    depends_on:
+      - app-infrastructure-consul
+    networks:
+      - appdebuggingnet
+    restart: always
+# 2. app microservices
+# 2.1 basic ms
+  app-microservice-basic:
+    container_name: app-microservice-basic-c
+    image: app-microservice-basic:latest
+    build:
+      context: .
+      dockerfile: app-basic/App.Basic.API/Dockerfile
+    environment:
+      # JwtSettings
+      - JwtSettings:Issuer=${JwtSettings_Issuer}
+      - JwtSettings:Audience=${JwtSettings_Audience}
+      - JwtSettings:SecretKey=${JwtSettings_SecretKey}
+      - JwtSettings:ExpiresDay=${JwtSettings_ExpiresDay}
+      # SoftwareProviderSettings
+      - SoftwareProviderSettings:Name=${SoftwareProviderSettings_Name}
+      - SoftwareProviderSettings:Mail=${SoftwareProviderSettings_Mail}
+      - SoftwareProviderSettings:Phone=${SoftwareProviderSettings_Phone}
+      # DatabaseSettings
+      - DatabaseSettings:Type=postgres
+      - DatabaseSettings:Server=app-infrastructure-database
+      - DatabaseSettings:Port=5432
+      - DatabaseSettings:Database=appbasic
+      - DatabaseSettings:UserId=${PostgresDB_User}
+      - DatabaseSettings:Password=${PostgresDB_Password}
+      # ConsulSettings
+      - ConsulSettings:Server:IP=app-infrastructure-consul
+      - ConsulSettings:Server:Port=8500
+      - ConsulSettings:Client:IP=app-microservice-basic
+      - ConsulSettings:Client:Port=80
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-microservice-basic/logs:/app/logs"
+    ports:
+      - "9511:80"
+    depends_on:
+      - app-infrastructure-database
+      - app-infrastructure-apigateway
+    networks:
+      - appdebuggingnet
+    restart: always
+# 2.2 oss ms
+  app-microservice-oss:
+    container_name: app-microservice-oss-c
+    image: app-microservice-oss:latest
+    build:
+      context: .
+      dockerfile: app-oss/App.OSS.API/Dockerfile
+    environment:
+      # JwtSettings
+      - JwtSettings:Issuer=${JwtSettings_Issuer}
+      - JwtSettings:Audience=${JwtSettings_Audience}
+      - JwtSettings:SecretKey=${JwtSettings_SecretKey}
+      - JwtSettings:ExpiresDay=${JwtSettings_ExpiresDay}
+      # DatabaseSettings
+      - DatabaseSettings:Type=postgres
+      - DatabaseSettings:Server=app-infrastructure-database
+      - DatabaseSettings:Port=5432
+      - DatabaseSettings:Database=apposs
+      - DatabaseSettings:UserId=${PostgresDB_User}
+      - DatabaseSettings:Password=${PostgresDB_Password}
+      # ConsulSettings
+      - ConsulSettings:Server:IP=app-infrastructure-consul
+      - ConsulSettings:Server:Port=8500
+      - ConsulSettings:Client:IP=app-microservice-oss
+      - ConsulSettings:Client:Port=80
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-microservice-oss/logs:/app/logs"
+      - "${Debugging_Volume_Base_Dir}/app-microservice-oss/wwwroot:/app/wwwroot"
+    ports:
+      - "9512:80"
+    depends_on:
+      - app-infrastructure-database
+      - app-infrastructure-apigateway
+    networks:
+      - appdebuggingnet
+    restart: always
+# 2.3 morejee ms
+  app-microservice-morejee:
+    container_name: app-microservice-morejee-c
+    image: app-microservice-morejee:latest
+    build:
+      context: .
+      dockerfile: app-morejee/App.MoreJee.API/Dockerfile
+    environment:
+      # JwtSettings
+      - JwtSettings:Issuer=${JwtSettings_Issuer}
+      - JwtSettings:Audience=${JwtSettings_Audience}
+      - JwtSettings:SecretKey=${JwtSettings_SecretKey}
+      - JwtSettings:ExpiresDay=${JwtSettings_ExpiresDay}
+      # DatabaseSettings
+      - DatabaseSettings:Type=postgres
+      - DatabaseSettings:Server=app-infrastructure-database
+      - DatabaseSettings:Port=5432
+      - DatabaseSettings:Database=appmorejee
+      - DatabaseSettings:UserId=${PostgresDB_User}
+      - DatabaseSettings:Password=${PostgresDB_Password}
+      # ConsulSettings
+      - ConsulSettings:Server:IP=app-infrastructure-consul
+      - ConsulSettings:Server:Port=8500
+      - ConsulSettings:Client:IP=app-microservice-morejee
+      - ConsulSettings:Client:Port=80
+      # API Gateway
+      - APIServer=http://app-infrastructure-apigateway
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-microservice-morejee/logs:/app/logs"
+    ports:
+      - "9513:80"
+    depends_on:
+      - app-infrastructure-database
+      - app-infrastructure-apigateway
+    networks:
+      - appdebuggingnet
+    restart: always
+#2.4 oms ms
+  app-microservice-oms:
+    container_name: app-microservice-oms-c
+    image: app-microservice-oms:latest
+    build: 
+      context: .
+      dockerfile: app-oms/App.OMS.API/Dockerfile
+    environment:
+      # JwtSettings
+      - JwtSettings:Issuer=${JwtSettings_Issuer}
+      - JwtSettings:Audience=${JwtSettings_Audience}
+      - JwtSettings:SecretKey=${JwtSettings_SecretKey}
+      - JwtSettings:ExpiresDay=${JwtSettings_ExpiresDay}
+      # DatabaseSettings
+      - DatabaseSettings:Type=postgres
+      - DatabaseSettings:Server=app-infrastructure-database
+      - DatabaseSettings:Port=5432
+      - DatabaseSettings:Database=appoms
+      - DatabaseSettings:UserId=${PostgresDB_User}
+      - DatabaseSettings:Password=${PostgresDB_Password}
+      # ConsulSettings
+      - ConsulSettings:Server:IP=app-infrastructure-consul
+      - ConsulSettings:Server:Port=8500
+      - ConsulSettings:Client:IP=app-microservice-oms
+      - ConsulSettings:Client:Port=80
+      # API Gateway
+      - APIServer=http://app-infrastructure-apigateway
+    volumes:
+      - "${Debugging_Volume_Base_Dir}/app-microservice-oms/logs:/app/logs"
+    ports:
+      - "9514:80"
+    depends_on:
+      - app-infrastructure-database
+      - app-infrastructure-apigateway
+    networks:
+      - appdebuggingnet
+    restart: always
+
+networks: 
+  appdebuggingnet:

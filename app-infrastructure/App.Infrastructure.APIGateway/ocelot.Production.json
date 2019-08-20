@@ -1,0 +1,51 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/basic/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/basic/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "ServiceName": "app-basic-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/oss/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/oss/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "ServiceName": "app-oss-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/morejee/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/morejee/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "ServiceName": "app-morejee-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/oms/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/oms/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options", "Patch" ],
+      "ServiceName": "app-oms-api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "app-infrastructure-consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
+}
