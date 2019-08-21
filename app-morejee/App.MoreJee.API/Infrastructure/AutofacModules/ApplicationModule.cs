@@ -26,7 +26,10 @@ namespace App.MoreJee.API.Infrastructure.AutofacModules
             builder.RegisterType<ProductPermissionGroupRepository>().As<IProductPermissionGroupRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ClientAssetPermissionControlService>().As<IClientAssetPermissionControlService>().InstancePerLifetimeScope();
             builder.RegisterType<SolutionRepository>().As<ISolutionRepository>().InstancePerLifetimeScope();
-            
+            builder.RegisterType<ProductPermissionRepository>().As<IProductPermissionRepository>().InstancePerLifetimeScope();
+
+
+
         }
     }
 }

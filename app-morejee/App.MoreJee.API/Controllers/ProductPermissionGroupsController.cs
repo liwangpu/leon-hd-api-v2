@@ -204,13 +204,26 @@ namespace App.MoreJee.API.Controllers
         }
         #endregion
 
-        [HttpGet("Product")]
-        [ProducesResponseType(typeof(List<OrganizationAllPermissionProductDTO>), 200)]
 
-        public async Task<IActionResult> GetOwnProduct([FromQuery]OrganizationAllPermissionProductQuery query)
-        {
-            var dto = await _mediator.Send(query);
-            return Ok(dto);
-        }
+
+
+
+
+
+
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="query"></param>
+        ///// <returns></returns>
+        //[HttpGet("Product")]
+        //[ProducesResponseType(typeof(List<OrganizationAllPermissionProductDTO>), 200)]
+
+        //public async Task<IActionResult> GetOwnProduct([FromQuery]OrganizationAllPermissionProductQuery query)
+        //{
+        //    var dto = await _mediator.Send(query);
+        //    return Ok(dto);
+        //}
     }
 }

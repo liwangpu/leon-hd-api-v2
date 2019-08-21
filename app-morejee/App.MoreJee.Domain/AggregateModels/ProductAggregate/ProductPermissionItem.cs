@@ -1,10 +1,10 @@
 ﻿using App.Base.Domain.Common;
+using App.MoreJee.Domain.Events.ProductEvents;
 
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
-    public class ProductPermissionItem
+    public class ProductPermissionItem : Entity
     {
-        public string Id { get; protected set; }
         public string ProductId { get; protected set; }
         public string ProductPermissionGroupId { get; protected set; }
         public ProductPermissionGroup ProductPermissionGroup { get; protected set; }
@@ -20,7 +20,8 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
             Id = GuidGen.NewGUID();
             ProductId = productId;
             ProductPermissionGroupId = groupId;
-        } 
+            AddDomainEvent(new ProductPermissionItemCreatedEvent(Id, ProductId, ProductPermissionGroupId));
+        }
         #endregion
     }
 }

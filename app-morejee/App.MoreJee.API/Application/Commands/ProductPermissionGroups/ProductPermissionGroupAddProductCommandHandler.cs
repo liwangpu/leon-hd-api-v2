@@ -9,6 +9,7 @@ namespace App.MoreJee.API.Application.Commands.ProductPermissionGroups
     public class ProductPermissionGroupAddProductCommandHandler : IRequestHandler<ProductPermissionGroupAddProductCommand>
     {
         private readonly IProductPermissionGroupRepository productPermissionGroupRepository;
+
         #region ctor
         public ProductPermissionGroupAddProductCommandHandler(IProductPermissionGroupRepository productPermissionGroupRepository)
         {
@@ -20,7 +21,7 @@ namespace App.MoreJee.API.Application.Commands.ProductPermissionGroups
         public async Task<Unit> Handle(ProductPermissionGroupAddProductCommand request, CancellationToken cancellationToken)
         {
             var data = await productPermissionGroupRepository.FindAsync(request.ProductPermissionGroupId);
-            await productPermissionGroupRepository.LoadOwnOrganItemsAsync(data);
+            await productPermissionGroupRepository.LoadOwnProductItemsAsync(data);
 
             var organIdArr = request.ProductIds.Split(",", StringSplitOptions.RemoveEmptyEntries);
             foreach (var organId in organIdArr)
@@ -28,7 +29,7 @@ namespace App.MoreJee.API.Application.Commands.ProductPermissionGroups
 
             await productPermissionGroupRepository.UpdateAsync(data);
             return Unit.Value;
-        } 
+        }
         #endregion
     }
 }

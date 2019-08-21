@@ -49,8 +49,9 @@ namespace App.MoreJee.Infrastructure
             modelBuilder.ApplyConfiguration(new ProductPermissionItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProductPermissionOrganEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SolutionEntityTypeConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new ProductPermissionEntityTypeConfiguration());
 
+            
             //蛇形命名所有数据库相关
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
