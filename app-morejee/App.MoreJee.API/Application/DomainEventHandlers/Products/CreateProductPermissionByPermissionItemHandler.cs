@@ -28,11 +28,11 @@ namespace App.MoreJee.API.Application.DomainEventHandlers.Products
             foreach (var item in group.OwnOrganItems)
             {
                 var exist = await productPermissionRepository.ExistAsync(notification.ProductId, item.OrganizationId, notification.ProductPermissionGroupId);
-                //    //if (!exist)
-                //    //{
-                //    var permission = new ProductPermission(notification.ProductId, item.OrganizationId, notification.ProductPermissionGroupId);
-                //    await productPermissionRepository.AddAsync(permission);
-                //    //}
+                if (!exist)
+                {
+                    var permission = new ProductPermission(notification.ProductId, item.OrganizationId, notification.ProductPermissionGroupId);
+                    await productPermissionRepository.AddAsync(permission);
+                }
             }
 
 

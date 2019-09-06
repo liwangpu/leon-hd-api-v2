@@ -26,6 +26,9 @@ namespace App.Base.Domain.Common
             if (inMinLen < 0)
                 inMinLen = 8;
             hashIds = new HashidsNet.Hashids(inSalt, inMinLen, "BCDFHJKNPQRSTUVWXYZMEGA0123456789");
+
+
+            
         }
 
         /// <summary>

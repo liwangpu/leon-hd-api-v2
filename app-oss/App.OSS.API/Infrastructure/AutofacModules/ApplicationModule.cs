@@ -18,7 +18,7 @@ namespace App.OSS.API.Infrastructure.AutofacModules
         protected override void Load(ContainerBuilder builder)
         {
             //builder.Register(c=>new FileAssetRepository(_mongoDbConnectionString)).As<IFileAssetRepository>().SingleInstance();
-            builder.RegisterType<FileAssetRepository>().As<IFileAssetRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FileAssetRepository>().As<IFileAssetRepository>().SingleInstance();
         }
     }
 }
