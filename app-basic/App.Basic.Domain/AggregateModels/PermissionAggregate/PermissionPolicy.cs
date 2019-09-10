@@ -1,6 +1,4 @@
-﻿
-
-using App.Base.Domain.Common;
+﻿using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 {

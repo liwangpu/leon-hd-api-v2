@@ -1,6 +1,7 @@
-﻿using App.Base.Domain.Common;
+﻿
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using MediatR;
 using System;
 using System.Linq;

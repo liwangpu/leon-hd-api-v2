@@ -37,7 +37,8 @@ namespace App.Basic.API.Application.Commands.CustomRoles
             request.ApplyPatch();
             data.UpdateBasicInfo(request.Name, request.Description);
             data.UpdateAccessPoint(request.AccessPointKeys);
-            await customRoleRepository.UpdateAsync(data);
+            customRoleRepository.Update(data);
+            await customRoleRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
         #endregion

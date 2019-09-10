@@ -1,5 +1,4 @@
 ﻿using App.Base.API.Application.Queries;
-using App.Base.Domain.Extentions;
 using App.Basic.Domain.AggregateModels.UserAggregate;
 using MediatR;
 

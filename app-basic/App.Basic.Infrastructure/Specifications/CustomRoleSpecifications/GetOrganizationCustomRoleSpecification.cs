@@ -1,10 +1,11 @@
-﻿using App.Base.Domain.Common;
+﻿
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 using System;
 using System.Linq;
 namespace App.Basic.Infrastructure.Specifications.CustomRoleSpecifications
 {
-    public class GetOrganizationCustomRoleSpecification : BaseSpecification<CustomRole>
+    public class GetOrganizationCustomRoleSpecification : Specification<CustomRole>
     {
         public GetOrganizationCustomRoleSpecification(string organizationId, string ids = null)
         {
@@ -12,7 +13,7 @@ namespace App.Basic.Infrastructure.Specifications.CustomRoleSpecifications
 
             if (!string.IsNullOrWhiteSpace(ids))
             {
-                var idArr = ids.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                var idArr = ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 AppendCriteriaAdd(x => idArr.Contains(x.Id));
             }
 

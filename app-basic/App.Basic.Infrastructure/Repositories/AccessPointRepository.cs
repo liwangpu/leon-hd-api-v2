@@ -1,6 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
-using App.Basic.Domain.AggregateModels.PermissionAggregate;
+﻿using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,15 +51,15 @@ namespace App.Basic.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(noOrder ? "PointKey" : specification.OrderBy, noOrder ? true : specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(AccessPoint entity)
+        public void Add(AccessPoint entity)
         {
+            entity._CustomizeId(GuidGenerator.NewGUID());
             _context.Set<AccessPoint>().Add(entity);
-            await _context.SaveEntitiesAsync();
         }
-        public async Task UpdateAsync(AccessPoint entity)
+
+        public void Update(AccessPoint entity)
         {
-            _context.Set<AccessPoint>().Update(entity);
-            await _context.SaveEntitiesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task DeleteAsync(string id, string operatorId)

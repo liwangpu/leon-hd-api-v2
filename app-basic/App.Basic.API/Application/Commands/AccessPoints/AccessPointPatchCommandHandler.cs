@@ -43,7 +43,8 @@ namespace App.Basic.API.Application.Commands.AccessPoints
             //    throw new HttpBadRequestException(commonLocalizer["FieldValueIsDuplicate", request.PointKey, "PointKey"]);
 
             accessPoint.UpdateBasicInfo(request.Name, request.PointKey, request.Description);
-            await accessPointRepository.UpdateAsync(accessPoint);
+            accessPointRepository.Update(accessPoint);
+            await accessPointRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
         #endregion

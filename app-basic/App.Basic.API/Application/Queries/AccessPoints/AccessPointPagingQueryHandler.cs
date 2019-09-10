@@ -1,8 +1,8 @@
 ﻿using App.Base.API;
 using App.Base.API.Application.Queries;
 using App.Base.API.Infrastructure.Services;
-using App.Base.Domain.Consts;
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.Consts;
 using App.Basic.Infrastructure.Specifications.AccessPointSpecifications;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -24,11 +24,6 @@ namespace App.Basic.API
             return WebHost.CreateDefaultBuilder(args)
                 .UseConfiguration(config)
                 .UseStartup<Startup>()
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(LogLevel.Trace);
-                })
                 .UseNLog()
 #if DEBUG
                 .UseUrls("http://*:5001")

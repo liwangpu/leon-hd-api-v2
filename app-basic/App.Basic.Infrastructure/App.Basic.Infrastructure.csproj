@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,31 +13,18 @@
   <ItemGroup>
     <Compile Remove="EntityConfigurations\OrganizationTreeEntityTypeConfiguration.cs" />
     <Compile Remove="Repositories\OrganizationTreeRepository.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetApplicationAdminManagedAccountPagingSpecification.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetApplicationAdminManagedAccountSpecification.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetNormalUserManagedAccountPagingSpecification.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetNormalUserManagedAccountSpecification.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetOrganAdminManagedAccountPagingSpecification.cs" />
-    <Compile Remove="Specifications\AccountSpecifications\GetOrganAdminManagedAccountSpecification.cs" />
-    <Compile Remove="Specifications\OrganizationSpecifications\GetOrganAdminManagedOrganizationPagingSpecification.cs" />
-    <Compile Remove="Specifications\OrganizationSpecifications\GetOrganAdminManagedOrganizationSpecification.cs" />
-    <Compile Remove="Specifications\OrganizationTreeSpecifications\GetOrganizationTreeNodeByObjIdSpecification.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.3" />
+    <PackageReference Include="Hashids.net" Version="1.2.2" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.6" />
+    <PackageReference Include="Hashids.net" Version="1.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
-    <ProjectReference Include="..\..\app-base\App.Base.Infrastructure\App.Base.Infrastructure.csproj" />
     <ProjectReference Include="..\App.Basic.Domain\App.Basic.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Specifications\OrganizationTreeSpecifications\" />
   </ItemGroup>
 
 </Project>

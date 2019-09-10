@@ -1,10 +1,10 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
-using App.Basic.Domain.AggregateModels.UserAggregate;
+﻿using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccountSpecifications
 {
-    public class GetNormalUserManagedAccountPagingSpecification : PagingBaseSpecification<Account>
+    public class GetNormalUserManagedAccountPagingSpecification : PagingSpecification<Account>
     {
         public GetNormalUserManagedAccountPagingSpecification(string accountId, int page, int pageSize, string orderBy, bool desc, string search, string mail, string phone)
         {

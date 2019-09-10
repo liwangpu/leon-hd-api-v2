@@ -1,10 +1,12 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
+﻿
+
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccountSpecifications
 {
-    public class GetOrganAdminManagedAccountPagingSpecification : PagingBaseSpecification<Account>
+    public class GetOrganAdminManagedAccountPagingSpecification : PagingSpecification<Account>
     {
         public GetOrganAdminManagedAccountPagingSpecification(string organId, int page, int pageSize, string orderBy, bool desc, string search, string mail, string phone)
         {

@@ -1,6 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
-using App.Basic.Domain.AggregateModels.UserAggregate;
+﻿using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -44,16 +43,12 @@ namespace App.Basic.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(specification.OrderBy, specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(UserRole entity)
+        public void Add(UserRole entity)
         {
+            entity._CustomizeId(GuidGenerator.NewGUID());
             _context.Set<UserRole>().Add(entity);
-            await _context.SaveEntitiesAsync();
         }
 
-        public Task UpdateAsync(UserRole entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task DeleteAsync(string id, string operatorId)
         {

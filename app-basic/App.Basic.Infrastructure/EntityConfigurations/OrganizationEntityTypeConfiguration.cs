@@ -12,6 +12,7 @@ namespace App.Basic.Infrastructure.EntityConfigurations
             builder.Ignore(b => b.DomainEvents);
             builder.Ignore(x => x.DisplayIndex);
             builder.Ignore(x => x.NodeType);
+            builder.Ignore(x => x.Fingerprint);
             builder.Property(x => x.Name);
             builder.Property(x => x.Description);
             builder.Property(x => x.Mail);

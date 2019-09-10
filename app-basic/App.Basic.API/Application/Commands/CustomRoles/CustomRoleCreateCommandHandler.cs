@@ -23,7 +23,8 @@ namespace App.Basic.API.Application.Commands.CustomRoles
         public async Task<string> Handle(CustomRoleCreateCommand request, CancellationToken cancellationToken)
         {
             var role = new CustomRole(request.Name, request.Description, identityService.GetOrganizationId());
-            await customRoleRepository.AddAsync(role);
+            customRoleRepository.Add(role);
+            await customRoleRepository.UnitOfWork.SaveEntitiesAsync();
             return role.Id;
         }
         #endregion

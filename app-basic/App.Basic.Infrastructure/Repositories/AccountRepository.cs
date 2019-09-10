@@ -1,8 +1,7 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
-using App.Base.Infrastructure;
-using App.Basic.Domain.AggregateModels.PermissionAggregate;
+﻿using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
@@ -62,16 +61,15 @@ namespace App.Basic.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(noOrder ? "modifiedTime" : specification.OrderBy, noOrder ? true : specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(Account entity)
+        public void Add(Account entity)
         {
+            entity._CustomizeId(GuidGenerator.NewGUID());
             _context.Set<Account>().Add(entity);
-            await _context.SaveEntitiesAsync();
         }
 
-        public async Task UpdateAsync(Account entity)
+        public void Update(Account entity)
         {
-            _context.Set<Account>().Update(entity);
-            await _context.SaveEntitiesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task DeleteAsync(string id, string operatorId)

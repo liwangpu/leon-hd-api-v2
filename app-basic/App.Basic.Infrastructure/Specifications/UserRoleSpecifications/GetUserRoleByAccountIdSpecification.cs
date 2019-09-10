@@ -1,9 +1,10 @@
-﻿using App.Base.Domain.Common;
+﻿
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.UserRoleSpecifications
 {
-    public class GetUserRoleByAccountIdSpecification : BaseSpecification<UserRole>
+    public class GetUserRoleByAccountIdSpecification : Specification<UserRole>
     {
         public GetUserRoleByAccountIdSpecification(string accountId)
         {

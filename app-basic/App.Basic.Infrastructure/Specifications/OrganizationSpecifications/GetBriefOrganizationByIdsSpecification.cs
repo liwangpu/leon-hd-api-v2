@@ -1,11 +1,11 @@
-﻿using App.Base.Domain.Common;
-using App.Basic.Domain.AggregateModels.UserAggregate;
+﻿using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using System;
 using System.Linq;
 
 namespace App.Basic.Infrastructure.Specifications.OrganizationSpecifications
 {
-    public class GetBriefOrganizationByIdsSpecification : BaseSpecification<Organization>
+    public class GetBriefOrganizationByIdsSpecification : Specification<Organization>
     {
         public GetBriefOrganizationByIdsSpecification(string ids)
         {
@@ -13,7 +13,7 @@ namespace App.Basic.Infrastructure.Specifications.OrganizationSpecifications
                 AppendCriteriaAdd(m => false);
 
 
-            var idArr = ids.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            var idArr = ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             AppendCriteriaAdd(m => idArr.Contains(m.Id));
 
             Criteria = CriteriaPredicate;

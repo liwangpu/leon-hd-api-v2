@@ -49,18 +49,17 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.2.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
-    <PackageReference Include="NLog" Version="4.6.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.1" />
+    <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\app-base\App.Base.API\App.Base.API.csproj" />
-    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
     <ProjectReference Include="..\App.Basic.Domain\App.Basic.Domain.csproj" />
     <ProjectReference Include="..\App.Basic.Infrastructure\App.Basic.Infrastructure.csproj" />
   </ItemGroup>
@@ -74,7 +73,6 @@
   <ItemGroup>
     <Folder Include="Application\Commands\UserRoles\" />
     <Folder Include="Application\Queries\Permissions\" />
-    <Folder Include="Infrastructure\Filters\" />
     <Folder Include="Infrastructure\MiddleWares\" />
   </ItemGroup>
 

@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Basic.Domain.AggregateModels.UserAggregate;
+﻿using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccountSpecifications
 {
-    public class GetAccountWithUserRoleSpecification : BaseSpecification<Account>
+    public class GetAccountWithUserRoleSpecification : Specification<Account>
     {
         public GetAccountWithUserRoleSpecification(string accountId)
         {

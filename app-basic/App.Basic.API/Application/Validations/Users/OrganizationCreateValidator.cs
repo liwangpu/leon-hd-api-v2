@@ -1,8 +1,8 @@
 ﻿using App.Base.API;
 using App.Base.API.Infrastructure.Services;
-using App.Base.Domain.Common;
 using App.Basic.API.Application.Commands.Organizations;
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using App.Basic.Infrastructure.Specifications.AccountSpecifications;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

@@ -1,9 +1,10 @@
-﻿using App.Base.Domain.Consts;
+﻿
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
 using App.Basic.Domain.Consts;
 using App.Basic.Infrastructure;
 using App.Basic.Infrastructure.Specifications.AccessPointSpecifications;
+using App.Basic.Infrastructure.Specifications.OrganizationSpecifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -33,17 +34,13 @@ namespace App.Basic.API.Infrastructure.Services
             //#if !DEBUG
             context.Database.Migrate();
 
-            #region 创建默认组织和用户
+            #region 创建默认组织
             {
-                var softWareOrgan = await organizationRepository.FindAsync(DomainEntityDefaultIdConst.SoftwareProviderOrganizationId);
-
-                //await organizationRepository.Entry(softWareOrgan).Collection(x => x.OwnAccounts).LoadAsync();
-
-                if (softWareOrgan == null)
+                var existSoftwareOragn = await organizationRepository.Get(new GetSoftwareOrganizationSpecification()).AnyAsync();
+                if (!existSoftwareOragn)
                 {
                     var softwareProviderOrgan = new Organization(OrganizationType.ServiceProvider, appConfig.SoftwareProviderSettings.Name, "默认组织", appConfig.SoftwareProviderSettings.Mail, appConfig.SoftwareProviderSettings.Phone, DomainEntityDefaultIdConst.SoftwareProviderAdminId);
-                    softwareProviderOrgan.CustomizeId(DomainEntityDefaultIdConst.SoftwareProviderOrganizationId);
-                    await organizationRepository.AddAsync(softwareProviderOrgan);
+                    organizationRepository.Add(softwareProviderOrgan);
                 }
             }
 
@@ -55,7 +52,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.ProductBasicInfoManagement", AccessPointInnerPointKeyConst.ProductBasicInfoManagement, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasRetrievePrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PriceRetrieve)).AnyAsync();
@@ -63,7 +60,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.RetrievePrice", AccessPointInnerPointKeyConst.PriceRetrieve, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasEditPrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PriceEdit)).AnyAsync();
@@ -71,7 +68,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.PriceEdit", AccessPointInnerPointKeyConst.PriceEdit, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasRetrievePartnerPrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PartnerPriceRetrieve)).AnyAsync();
@@ -79,7 +76,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.RetrievePartnerPrice", AccessPointInnerPointKeyConst.PartnerPriceRetrieve, string.Empty, new List<int> { OrganizationType.Brand.Id, OrganizationType.Partner.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasEditPartnerPrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PartnerPriceEdit)).AnyAsync();
@@ -87,7 +84,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.PartnerPriceEdit", AccessPointInnerPointKeyConst.PartnerPriceEdit, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasRetrievePurchasePrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PurchasePriceRetrieve)).AnyAsync();
@@ -95,7 +92,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.RetrievePurchasePrice", AccessPointInnerPointKeyConst.PurchasePriceRetrieve, string.Empty, new List<int> { OrganizationType.Brand.Id, OrganizationType.Supplier.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasEditPurchasePrice = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.PurchasePriceEdit)).AnyAsync();
@@ -103,7 +100,7 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.PurchasePriceEdit", AccessPointInnerPointKeyConst.PurchasePriceEdit, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
 
             var hasClientAssetManagement = await accessPointRepository.Get(new PointKeyUniqueCheckSpecification(AccessPointInnerPointKeyConst.ClientAssetManagement)).AnyAsync();
@@ -111,13 +108,11 @@ namespace App.Basic.API.Infrastructure.Services
             {
                 var accPoint = new AccessPoint("AccessPoint.ClientAssetManagement", AccessPointInnerPointKeyConst.ClientAssetManagement, string.Empty, new List<int> { OrganizationType.Brand.Id });
                 accPoint.SignInner();
-                await accessPointRepository.AddAsync(accPoint);
+                accessPointRepository.Add(accPoint);
             }
-
-
-
-
             #endregion
+
+            await organizationRepository.UnitOfWork.SaveEntitiesAsync();
             //#endif
         }
 

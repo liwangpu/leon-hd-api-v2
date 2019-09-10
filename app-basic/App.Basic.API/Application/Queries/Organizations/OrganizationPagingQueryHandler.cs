@@ -1,7 +1,8 @@
 ﻿using App.Base.API.Application.Queries;
 using App.Base.API.Infrastructure.Services;
-using App.Base.Domain.Common;
+
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using App.Basic.Infrastructure.Specifications.OrganizationSpecifications;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

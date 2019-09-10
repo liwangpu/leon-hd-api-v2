@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Basic.Domain.AggregateModels.PermissionAggregate;
+﻿using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccessPointSpecifications
 {
-    public class PointKeyUniqueCheckSpecification : BaseSpecification<AccessPoint>
+    public class PointKeyUniqueCheckSpecification : Specification<AccessPoint>
     {
         public PointKeyUniqueCheckSpecification(string key, string id = null)
         {

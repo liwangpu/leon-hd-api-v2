@@ -1,9 +1,10 @@
-﻿using App.Base.Domain.Common;
+﻿
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.RoleSpecifications
 {
-    public class RolePagingSpecification: PagingBaseSpecification<SystemRole>
+    public class RolePagingSpecification: PagingSpecification<SystemRole>
     {
         #region ctor
         public RolePagingSpecification(int page, int pageSize, string search)

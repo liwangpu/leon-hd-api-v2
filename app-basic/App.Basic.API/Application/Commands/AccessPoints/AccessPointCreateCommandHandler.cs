@@ -28,7 +28,8 @@ namespace App.Basic.API.Application.Commands.AccessPoints
                 throw new HttpForbiddenException();
 
             var accessPoint = new AccessPoint(request.Name, request.PointKey, request.Description);
-            await accessPointRepository.AddAsync(accessPoint);
+            accessPointRepository.Add(accessPoint);
+            await accessPointRepository.UnitOfWork.SaveEntitiesAsync();
             return accessPoint.Id;
         }
         #endregion

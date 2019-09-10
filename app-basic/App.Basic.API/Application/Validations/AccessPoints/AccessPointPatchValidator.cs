@@ -1,7 +1,7 @@
 ﻿using App.Base.API;
-using App.Base.Domain.Consts;
 using App.Basic.API.Application.Commands.AccessPoints;
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.Consts;
 using App.Basic.Infrastructure.Specifications.AccessPointSpecifications;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

@@ -1,7 +1,7 @@
 ﻿using App.Base.API;
 using App.Base.API.Infrastructure.Exceptions;
-using App.Base.Domain.Common;
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using System.Threading;

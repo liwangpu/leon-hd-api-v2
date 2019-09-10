@@ -1,7 +1,6 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
-using App.Base.Domain.Extentions;
+﻿using App.Basic.Domain.Consts;
 using App.Basic.Domain.Events.UserEvents;
+using App.Basic.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +9,7 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
     /// <summary>
     /// 组织
     /// </summary>
-    public class Organization : Tree
+    public class Organization : TreeEntity, IAggregateRoot
     {
         private readonly List<Account> _ownAccounts;
         public string Name { get; protected set; }
@@ -43,7 +42,6 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
         public Organization(OrganizationType organType, string name, string description, string mail, string phone, string creator, string parentId = null)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Active = EntityStateConst.Active;
             CreatedTime = DateTime.UtcNow.ToUnixTimeSeconds();
             ModifiedTime = CreatedTime;
@@ -78,11 +76,18 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
         }
         #endregion
 
+        #region UpdateContactInfo 更新组织联系信息
+        /// <summary>
+        /// 更新组织联系信息
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <param name="phone"></param>
         public void UpdateContactInfo(string mail, string phone)
         {
             Mail = mail;
             Phone = phone;
-        }
+        } 
+        #endregion
 
         #region Delete 删除组织
         /// <summary>
@@ -94,17 +99,6 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
             Active = EntityStateConst.InActive;
             Modifier = operatorId;
             ModifiedTime = DateTime.UtcNow.ToUnixTimeSeconds();
-        }
-        #endregion
-
-        #region AddAccount 添加用户
-        /// <summary>
-        /// 添加用户
-        /// </summary>
-        /// <param name="account"></param>
-        public void AddAccount(Account account)
-        {
-            _ownAccounts.Add(account);
         }
         #endregion
 

@@ -2,7 +2,7 @@
 
 namespace App.Basic.API.Migrations
 {
-    public partial class initDb : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,7 +75,8 @@ namespace App.Basic.API.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: true),
+                    first_name = table.Column<string>(nullable: true),
+                    last_name = table.Column<string>(nullable: true),
                     description = table.Column<string>(nullable: true),
                     password = table.Column<string>(nullable: true),
                     mail = table.Column<string>(nullable: true),
@@ -124,6 +125,12 @@ namespace App.Basic.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "ix_account_first_name",
+                schema: "basicapp",
+                table: "account",
+                column: "first_name");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_account_legal_person",
                 schema: "basicapp",
                 table: "account",
@@ -134,12 +141,6 @@ namespace App.Basic.API.Migrations
                 schema: "basicapp",
                 table: "account",
                 column: "mail");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_name",
-                schema: "basicapp",
-                table: "account",
-                column: "name");
 
             migrationBuilder.CreateIndex(
                 name: "ix_account_organization_id",

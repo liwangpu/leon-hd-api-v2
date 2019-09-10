@@ -27,7 +27,8 @@ namespace App.Basic.API.Application.DomainEventHandlers.Users
             if (organization != null)
             {
                 organization.UpdateContactInfo(notification.Mail, notification.Phone);
-                await organizationRepository.UpdateAsync(organization);
+                organizationRepository.Update(organization);
+                await organizationRepository.UnitOfWork.SaveEntitiesAsync();
             }
         }
     }

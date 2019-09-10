@@ -40,7 +40,8 @@ namespace App.Basic.API.Application.Commands.Accounts
 
             account.UpdateCustomRoles(request.CustomRoleIds.Split(",", StringSplitOptions.RemoveEmptyEntries));
 
-            await accountRepository.UpdateAsync(account);
+            accountRepository.Update(account);
+            await accountRepository.UnitOfWork.SaveEntitiesAsync();
 
             return Unit.Value;
         }

@@ -1,8 +1,7 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
-using App.Basic.Domain.AggregateModels.PermissionAggregate;
+﻿using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
 using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
@@ -57,47 +56,47 @@ namespace App.Basic.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(noOrder ? "modifiedTime" : specification.OrderBy, noOrder ? true : specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(Organization entity)
+        public void Add(Organization entity)
         {
-            if (!string.IsNullOrWhiteSpace(entity.ParentId) && entity.ParentId != DomainEntityDefaultIdConst.SoftwareProviderOrganizationId)
-            {
-                var parentCat = await FindAsync(entity.ParentId);
-                entity.SetFingerprint(parentCat.Fingerprint);
-                entity.SetLValue(parentCat.RValue);
-                entity.SetRValue(entity.LValue + 1);
+            //if (!string.IsNullOrWhiteSpace(entity.ParentId) && entity.ParentId != DomainEntityDefaultIdConst.SoftwareProviderOrganizationId)
+            //{
+            //    var parentCat = await FindAsync(entity.ParentId);
+            //    entity.SetFingerprint(parentCat.Fingerprint);
+            //    entity.SetLValue(parentCat.RValue);
+            //    entity.SetRValue(entity.LValue + 1);
 
-                #region 改动相关节点左右值信息
-                {
-                    var affectCats = await _context.Set<Organization>().Where(x => x.Fingerprint == parentCat.Fingerprint && x.RValue >= parentCat.RValue).ToListAsync();
+            //    #region 改动相关节点左右值信息
+            //    {
+            //        var affectCats = await _context.Set<Organization>().Where(x => x.Fingerprint == parentCat.Fingerprint && x.RValue >= parentCat.RValue).ToListAsync();
 
-                    for (var idx = affectCats.Count - 1; idx >= 0; idx--)
-                    {
-                        var cat = affectCats[idx];
-                        cat.SetRValue(cat.RValue + 2);
-                        if (cat.LValue > parentCat.LValue)
-                            cat.SetLValue(cat.LValue + 2);
-                        _context.Set<Organization>().Update(cat);
-                    }
-                }
-                #endregion
+            //        for (var idx = affectCats.Count - 1; idx >= 0; idx--)
+            //        {
+            //            var cat = affectCats[idx];
+            //            cat.SetRValue(cat.RValue + 2);
+            //            if (cat.LValue > parentCat.LValue)
+            //                cat.SetLValue(cat.LValue + 2);
+            //            _context.Set<Organization>().Update(cat);
+            //        }
+            //    }
+            //    #endregion
 
-            }
-            else
-            {
-                //全新节点
-                entity.SetLValue(1);
-                entity.SetRValue(2);
-                entity.SetFingerprint();
-            }
+            //}
+            //else
+            //{
+            //    //全新节点
+            //    entity.SetLValue(1);
+            //    entity.SetRValue(2);
+            //    entity.SetFingerprint();
+            //}
 
+            entity._CustomizeId(GuidGenerator.NewGUID());
             _context.Set<Organization>().Add(entity);
-            await _context.SaveEntitiesAsync();
+            //await _context.SaveEntitiesAsync();
         }
 
-        public async Task UpdateAsync(Organization entity)
+        public void Update(Organization entity)
         {
-            _context.Set<Organization>().Update(entity);
-            await _context.SaveEntitiesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task DeleteAsync(string id, string operatorId)

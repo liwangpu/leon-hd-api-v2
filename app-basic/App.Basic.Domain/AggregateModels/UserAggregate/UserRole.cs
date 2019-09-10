@@ -1,8 +1,8 @@
-﻿using App.Base.Domain.Common;
+﻿using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Domain.AggregateModels.UserAggregate
 {
-    public class UserRole : Entity
+    public class UserRole : Entity, IAggregateRoot
     {
         public string CustomRoleId { get; protected set; }
         public string AccountId { get; protected set; }
@@ -17,7 +17,6 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
         public UserRole(string accountId, string roleId)
             : this()
         {
-            Id = GuidGen.NewGUID();
             AccountId = accountId;
             CustomRoleId = roleId;
         }

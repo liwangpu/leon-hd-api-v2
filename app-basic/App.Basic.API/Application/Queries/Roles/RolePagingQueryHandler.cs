@@ -1,6 +1,6 @@
 ﻿using App.Base.API.Application.Queries;
-using App.Base.Domain.Common;
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using System.Linq;

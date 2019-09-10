@@ -1,8 +1,8 @@
-﻿using App.Base.Domain.Common;
+﻿using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 {
-    public class CustomRole : Entity
+    public class CustomRole : Entity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Description { get; protected set; }
@@ -18,7 +18,6 @@ namespace App.Basic.Domain.AggregateModels.PermissionAggregate
         public CustomRole(string name, string description, string organizationId)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Name = name;
             Description = description;
             OrganizationId = organizationId;

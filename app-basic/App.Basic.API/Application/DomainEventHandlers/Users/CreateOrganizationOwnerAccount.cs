@@ -1,8 +1,9 @@
-﻿using App.Base.Domain.Common;
+﻿
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
 using App.Basic.Domain.Consts;
 using App.Basic.Domain.Events.UserEvents;
+using App.Basic.Domain.SeedWork;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,17 +38,24 @@ namespace App.Basic.API.Application.DomainEventHandlers.Users
                 systemRoleId = SystemRole.SupplierOrganizationAdmin.Id;
             else { }
 
-            var owner = new Account("Admin", "", MD5Gen.CalcString(DomainPasswordConst.NormalPassword), notification.Organization.Mail, notification.Organization.Phone, systemRoleId, notification.Organization.Id, DomainEntityDefaultIdConst.SoftwareProviderAdminId);
+            var owner = new Account("Admin", "", MD5Generator.CalcString(DomainPasswordConst.NormalPassword), notification.Organization.Mail, notification.Organization.Phone, systemRoleId, notification.Organization.Id, DomainEntityDefaultIdConst.SoftwareProviderAdminId);
             owner.SignLegalPerson();
 
-            //如果是软件供应商,设置一下管理员的id
-            if (notification.Organization.Id == DomainEntityDefaultIdConst.SoftwareProviderOrganizationId)
-                owner.CustomizeId(DomainEntityDefaultIdConst.SoftwareProviderAdminId);
-            await accountRepository.AddAsync(owner);
+            ////如果是软件供应商,设置一下管理员的id
+            //if (notification.Organization.Id == DomainEntityDefaultIdConst.SoftwareProviderOrganizationId)
+            //    owner.CustomizeId(DomainEntityDefaultIdConst.SoftwareProviderAdminId);
+            accountRepository.Add(owner);
 
             var organ = await organizationRepository.FindAsync(owner.OrganizationId);
             organ.SetOwner(owner.Id);
-            await organizationRepository.UpdateAsync(organ);
+            organizationRepository.Update(organ);
+
+
+
+            await organizationRepository.UnitOfWork.SaveEntitiesAsync();
+
+
+
 
             //var systemRoleId = SystemRole.BrandOrganizationAdmin.Id;
             ////如果是软件供应商,设置一下管理员的默认角色Id

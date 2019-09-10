@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using App.Base.API.Infrastructure.Services;
-using App.Base.Domain.Common;
+﻿using App.Base.API.Infrastructure.Services;
 using App.Basic.Domain.AggregateModels.PermissionAggregate;
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace App.Basic.API.Application.Queries.Accounts

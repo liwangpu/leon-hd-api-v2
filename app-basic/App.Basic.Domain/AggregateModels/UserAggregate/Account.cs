@@ -1,7 +1,6 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
-using App.Base.Domain.Extentions;
+﻿using App.Basic.Domain.Consts;
 using App.Basic.Domain.Events.UserEvents;
+using App.Basic.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +9,7 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
     /// <summary>
     /// 用户
     /// </summary>
-    public class Account : Entity
+    public class Account : Entity, IAggregateRoot
     {
         private readonly List<UserRole> _ownRoles;
         public string FirstName { get; protected set; }
@@ -50,7 +49,6 @@ namespace App.Basic.Domain.AggregateModels.UserAggregate
         public Account(string firstName, string lastName, string password, string mail, string phone, int systemRoleId, string organizationId, string creator)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Active = EntityStateConst.Active;
             CreatedTime = DateTime.UtcNow.ToUnixTimeSeconds();
             ModifiedTime = CreatedTime;

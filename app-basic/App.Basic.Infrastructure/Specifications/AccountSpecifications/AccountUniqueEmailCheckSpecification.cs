@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Basic.Domain.AggregateModels.UserAggregate;
+﻿using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccountSpecifications
 {
-    public class AccountUniqueEmailCheckSpecification :  BaseSpecification<Account>
+    public class AccountUniqueEmailCheckSpecification : Specification<Account>
     {
         #region ctor
         public AccountUniqueEmailCheckSpecification(string mail)

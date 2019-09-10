@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace App.Basic.API.Migrations
 {
     [DbContext(typeof(BasicAppContext))]
-    [Migration("20190808112920_ChangeErrorAccountFirstName")]
-    partial class ChangeErrorAccountFirstName
+    [Migration("20190910105547_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

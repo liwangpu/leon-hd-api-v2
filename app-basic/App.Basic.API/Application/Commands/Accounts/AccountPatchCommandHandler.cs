@@ -1,7 +1,6 @@
 ﻿using App.Base.API;
 using App.Base.API.Infrastructure.Exceptions;
 using App.Base.API.Infrastructure.Services;
-using App.Basic.API.Infrastructure.Services;
 using App.Basic.Domain.AggregateModels.UserAggregate;
 using AutoMapper;
 using MediatR;
@@ -9,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace App.Basic.API.Application.Commands.Accounts
 {
@@ -44,7 +42,8 @@ namespace App.Basic.API.Application.Commands.Accounts
             mapper.Map(account, request);
             request.ApplyPatch();
             account.UpdateBasicInfo(request.FirstName, request.LastName, request.Description, request.Mail, request.Phone, identityService.GetUserId());
-            await accountRepository.UpdateAsync(account);
+            accountRepository.Update(account);
+            await accountRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
     }

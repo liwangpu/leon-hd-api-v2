@@ -44,7 +44,8 @@ namespace App.Basic.API.Application.Commands.Organizations
             mapper.Map(organ, request);
             request.ApplyPatch();
             organ.UpdateBasicInfo(request.Name, request.Description, identityService.GetUserId());
-            await organRepository.UpdateAsync(organ);
+            organRepository.Update(organ);
+            await organRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
     }

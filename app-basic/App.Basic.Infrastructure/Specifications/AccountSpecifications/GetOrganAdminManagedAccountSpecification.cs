@@ -1,10 +1,12 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
+﻿
+
 using App.Basic.Domain.AggregateModels.UserAggregate;
+using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 
 namespace App.Basic.Infrastructure.Specifications.AccountSpecifications
 {
-    public class GetOrganAdminManagedAccountSpecification : BaseSpecification<Account>
+    public class GetOrganAdminManagedAccountSpecification : Specification<Account>
     {
         public GetOrganAdminManagedAccountSpecification(string organId)
         {

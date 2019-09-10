@@ -1,10 +1,10 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
+﻿using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 using System.Collections.Generic;
 
 namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 {
-    public class SystemRole : Enumeration
+    public class SystemRole : Enumeration, IAggregateRoot
     {
         public static SystemRole ApplicationManager = new ApplicationManagerRole();
         public static SystemRole ApplicationService = new ApplicationServiceRole();
@@ -14,6 +14,7 @@ namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 
         public static SystemRole NormalUser = new NormalUserRole();
         public string AccessPointKeys { get; set; }
+
         #region ctor
         public SystemRole(int id, string name, string description, string accessPointKeys)
         : base(id, name, description)

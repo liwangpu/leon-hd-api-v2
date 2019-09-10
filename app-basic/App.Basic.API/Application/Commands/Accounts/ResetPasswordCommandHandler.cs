@@ -16,7 +16,7 @@ namespace App.Basic.API.Application.Commands.Accounts
         private readonly IIdentityService identityService;
         private readonly IStringLocalizer<CommonTranslation> commonLocalizer;
 
-        public ResetPasswordCommandHandler(IAccountRepository accountRepository,  IIdentityService identityService, IStringLocalizer<CommonTranslation> commonLocalizer)
+        public ResetPasswordCommandHandler(IAccountRepository accountRepository, IIdentityService identityService, IStringLocalizer<CommonTranslation> commonLocalizer)
         {
             this.accountRepository = accountRepository;
             this.identityService = identityService;
@@ -33,7 +33,8 @@ namespace App.Basic.API.Application.Commands.Accounts
 
             var account = await accountRepository.FindAsync(request.AccountId);
             account.ChangePassword(request.Password, currrentUserId);
-            await accountRepository.UpdateAsync(account);
+            accountRepository.Update(account);
+            await accountRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
     }

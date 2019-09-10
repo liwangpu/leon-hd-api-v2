@@ -1,6 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
-using App.Basic.Domain.AggregateModels.PermissionAggregate;
+﻿using App.Basic.Domain.AggregateModels.PermissionAggregate;
+using App.Basic.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +18,8 @@ namespace App.Basic.Infrastructure.Repositories
                 return _context;
             }
         }
+
+        IUnitOfWork IRepository<CustomRole>.UnitOfWork => throw new System.NotImplementedException();
 
         #region ctor
         public CustomRoleRepository(BasicAppContext context)
@@ -47,16 +48,15 @@ namespace App.Basic.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(noOrder ? "name" : specification.OrderBy, noOrder ? true : specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(CustomRole entity)
+        public void Add(CustomRole entity)
         {
+            entity._CustomizeId(GuidGenerator.NewGUID());
             _context.Set<CustomRole>().Add(entity);
-            await _context.SaveEntitiesAsync();
         }
 
-        public async Task UpdateAsync(CustomRole entity)
+        public void Update(CustomRole entity)
         {
-            _context.Set<CustomRole>().Update(entity);
-            await _context.SaveEntitiesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task DeleteAsync(string id, string operatorId)

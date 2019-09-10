@@ -5,7 +5,7 @@ namespace App.Basic.Domain.Events.UserEvents
 {
     public class OrganizationCreatedEvent : INotification
     {
-        public Organization Organization { get; protected set; }
+        public Organization Organization { get; }
         public OrganizationCreatedEvent(Organization organ)
         {
             Organization = organ;

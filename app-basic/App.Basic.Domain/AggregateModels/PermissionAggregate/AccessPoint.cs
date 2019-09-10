@@ -1,10 +1,10 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Consts;
+﻿using App.Basic.Domain.Consts;
+using App.Basic.Domain.SeedWork;
 using System.Collections.Generic;
 
 namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 {
-    public class AccessPoint : Entity
+    public class AccessPoint : Entity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Description { get; protected set; }
@@ -13,9 +13,9 @@ namespace App.Basic.Domain.AggregateModels.PermissionAggregate
 
         public string ApplyOranizationTypeIds { get; protected set; }
 
+        #region ctor
         protected AccessPoint()
         {
-            Id = GuidGen.NewGUID();
         }
 
         public AccessPoint(string name, string pointKey, string description, string applyOrganTypeIds = null)
@@ -25,7 +25,8 @@ namespace App.Basic.Domain.AggregateModels.PermissionAggregate
             PointKey = pointKey;
             Description = description;
             ApplyOranizationTypeIds = applyOrganTypeIds;
-        }
+        } 
+        #endregion
 
         public AccessPoint(string name, string pointKey, string description, List<int> applyOrganTypeIds)
             : this(name, pointKey, description)
