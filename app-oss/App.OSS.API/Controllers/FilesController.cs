@@ -1,8 +1,8 @@
 ﻿using App.Base.API.Application.Queries;
-using App.Base.Domain.Common;
 using App.OSS.API.Application.Commands.Files;
 using App.OSS.API.Application.Queries.Files;
 using App.OSS.API.Infrastructure.Consts;
+using App.OSS.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -95,7 +95,7 @@ namespace App.OSS.API.Controllers
                 fs.Flush();
             }
 
-            command.MD5 = MD5Gen.CalcFile(tmpPath);
+            command.MD5 = MD5Generator.CalcFile(tmpPath);
 
             var filePath = Path.Combine(clientAssetFolder, $"{command.MD5}.{command.FileExt}");
 
@@ -140,7 +140,7 @@ namespace App.OSS.API.Controllers
                 fs.Flush();
             }
             var finfo = new FileInfo(tmpPath);
-            command.MD5 = MD5Gen.CalcFile(tmpPath);
+            command.MD5 = MD5Generator.CalcFile(tmpPath);
             command.Size = finfo.Length;
             var filePath = Path.Combine(clientAssetFolder, $"{command.MD5}.{command.FileExt}");
 

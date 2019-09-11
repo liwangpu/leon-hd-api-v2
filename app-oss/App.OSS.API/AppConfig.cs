@@ -1,6 +1,9 @@
-﻿#pragma warning disable 1591
+﻿
 namespace App.OSS.API
 {
+    /// <summary>
+    /// 应用程序配置文件
+    /// </summary>
     public class AppConfig
     {
         public JwtSettings JwtSettings { get; set; }

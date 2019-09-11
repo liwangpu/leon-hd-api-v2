@@ -1,8 +1,8 @@
-﻿using App.Base.Domain.Common;
+﻿using App.MoreJee.Domain.SeedWork;
 
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
-    public class ProductPermission : Entity
+    public class ProductPermission : Entity, IAggregateRoot
     {
         public string ProductId { get; set; }
         public string OrganizationId { get; protected set; }
@@ -16,7 +16,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 
         public ProductPermission(string productId, string organizationId, string productPermissionGroupId)
         {
-            Id = GuidGen.NewGUID();
             ProductId = productId;
             OrganizationId = organizationId;
             ProductPermissionGroupId = productPermissionGroupId;

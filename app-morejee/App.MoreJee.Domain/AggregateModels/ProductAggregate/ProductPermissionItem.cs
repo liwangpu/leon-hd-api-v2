@@ -1,5 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.MoreJee.Domain.Events.ProductEvents;
+﻿using App.MoreJee.Domain.Events.ProductEvents;
+using App.MoreJee.Domain.SeedWork;
 
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
@@ -17,7 +17,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 
         public ProductPermissionItem(string productId, string groupId)
         {
-            Id = GuidGen.NewGUID();
             ProductId = productId;
             ProductPermissionGroupId = groupId;
             AddDomainEvent(new ProductPermissionItemCreatedEvent(Id, ProductId, ProductPermissionGroupId));

@@ -20,20 +20,19 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.2.2" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.1.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
-    <PackageReference Include="NLog" Version="4.6.2" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.1" />
-    <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />
+    <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.5" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.1" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0004" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\app-base\App.Base.API\App.Base.API.csproj" />
-    <ProjectReference Include="..\..\app-base\App.Base.Domain\App.Base.Domain.csproj" />
     <ProjectReference Include="..\App.OSS.Domain\App.OSS.Domain.csproj" />
     <ProjectReference Include="..\App.OSS.Infrastructure\App.OSS.Infrastructure.csproj" />
   </ItemGroup>

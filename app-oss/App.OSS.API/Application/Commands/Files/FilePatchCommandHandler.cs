@@ -17,6 +17,7 @@ namespace App.OSS.API.Application.Commands.Files
         private readonly IMapper mapper;
         private readonly IStringLocalizer<CommonTranslation> localizer;
 
+        #region ctor
         public FilePatchCommandHandler(IFileAssetRepository fileAssetRepository, IIdentityService identityService, IMapper mapper, IStringLocalizer<CommonTranslation> localizer)
         {
             this.fileAssetRepository = fileAssetRepository;
@@ -24,8 +25,9 @@ namespace App.OSS.API.Application.Commands.Files
             this.mapper = mapper;
             this.localizer = localizer;
         }
+        #endregion
 
-
+        #region Handle
         public async Task<Unit> Handle(FilePatchCommand request, CancellationToken cancellationToken)
         {
             var asset = await fileAssetRepository.FindAsync(request.Id);
@@ -35,8 +37,10 @@ namespace App.OSS.API.Application.Commands.Files
             mapper.Map(asset, request);
             request.ApplyPatch();
             asset.UpdateBasicInfo(request.Name, request.Description, request.FileState, operatorId);
-            await fileAssetRepository.UpdateAsync(asset);
+            fileAssetRepository.Update(asset);
+            await fileAssetRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
-        }
+        } 
+        #endregion
     }
 }

@@ -1,10 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Extentions;
+﻿using App.MoreJee.Domain.SeedWork;
 using System;
 
 namespace App.MoreJee.Domain.AggregateModels.ClientAssetAggregate
 {
-    public class Texture : Entity
+    public class Texture : Entity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Icon { get; protected set; }
@@ -24,7 +23,6 @@ namespace App.MoreJee.Domain.AggregateModels.ClientAssetAggregate
         public Texture(string name, string icon, string organizationId, string creator)
             : this()
         {
-            Id = GuidGen.NewGUID();
             CreatedTime = DateTime.UtcNow.ToUnixTimeSeconds();
             ModifiedTime = CreatedTime;
             Name = name;

@@ -1,5 +1,4 @@
-﻿#pragma warning disable 1591
-using App.OSS.Domain.AggregateModels.FileAssetAggregate;
+﻿using App.OSS.Domain.AggregateModels.FileAssetAggregate;
 using App.OSS.Infrastructure.Repositories;
 using Autofac;
 namespace App.OSS.API.Infrastructure.AutofacModules

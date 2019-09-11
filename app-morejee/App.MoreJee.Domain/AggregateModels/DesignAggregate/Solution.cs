@@ -1,10 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Extentions;
+﻿using App.MoreJee.Domain.SeedWork;
 using System;
 
 namespace App.MoreJee.Domain.AggregateModels.DesignAggregate
 {
-    public class Solution : Entity
+    public class Solution : Entity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Icon { get; protected set; }
@@ -25,7 +24,6 @@ namespace App.MoreJee.Domain.AggregateModels.DesignAggregate
         public Solution(string name, string description, string icon, string organizationId, string creator)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Name = name;
             Icon = icon;
             Description = description;

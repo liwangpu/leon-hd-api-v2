@@ -1,6 +1,6 @@
 ﻿using App.Base.API.Infrastructure.Exceptions;
-using App.Base.Domain.Common;
 using App.OSS.API.Infrastructure.Consts;
+using App.OSS.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -71,7 +71,7 @@ namespace App.OSS.API.Controllers
                 fs.Flush();
             }
 
-            var md5 = MD5Gen.CalcFile(tmpPath);
+            var md5 = MD5Generator.CalcFile(tmpPath);
             var fileName = $"{md5}.{assetExt}";
             var iconPath = Path.Combine(srcClientAssetFolder, fileName);
             //如果文件不存在资源文件夹,拷贝存储

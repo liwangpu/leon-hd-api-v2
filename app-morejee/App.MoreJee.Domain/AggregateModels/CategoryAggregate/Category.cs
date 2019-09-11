@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
+﻿using App.MoreJee.Domain.SeedWork;
 using System;
 
 namespace App.MoreJee.Domain.AggregateModels.CategoryAggregate
 {
-    public class Category : Tree
+    public class Category : TreeEntity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Description { get; protected set; }
@@ -18,7 +18,6 @@ namespace App.MoreJee.Domain.AggregateModels.CategoryAggregate
         #region ctor
         protected Category()
         {
-            Id = GuidGen.NewGUID();
             CreatedTime = DateTime.UtcNow;
             ModifiedTime = CreatedTime;
         }

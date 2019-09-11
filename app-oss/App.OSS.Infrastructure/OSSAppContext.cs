@@ -1,5 +1,4 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
+﻿using App.OSS.Domain.SeedWork;
 using App.OSS.Infrastructure.EntityConfigurations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -64,18 +63,7 @@ namespace App.OSS.Infrastructure
             }
         }
 
-        /// <summary>
-        /// 默认是SaveChangesAsync后发布域事件
-        /// 如果需要自己控制发布前后,使用同名重载函数
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return await SaveEntitiesAsync(true, cancellationToken);
-        }
-
-        public async Task<bool> SaveEntitiesAsync(bool publishDomainEventAfterSaveChangeAsync, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Dispatch Domain Events collection. 
             // Choices:
@@ -89,16 +77,8 @@ namespace App.OSS.Infrastructure
             // performed through the DbContext will be committed
             //var result = await base.SaveChangesAsync();
 
-            if (publishDomainEventAfterSaveChangeAsync)
-            {
-                await base.SaveChangesAsync();
-                await _mediator.DispatchDomainEventsAsync(this);
-            }
-            else
-            {
-                await _mediator.DispatchDomainEventsAsync(this);
-                await base.SaveChangesAsync();
-            }
+            await base.SaveChangesAsync();
+            await _mediator.DispatchDomainEventsAsync(this);
             return true;
         }
 

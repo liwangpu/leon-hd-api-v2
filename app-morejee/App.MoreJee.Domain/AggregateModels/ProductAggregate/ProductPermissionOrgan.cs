@@ -1,6 +1,4 @@
-﻿using App.Base.Domain.Common;
-
-namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
+﻿namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
     public class ProductPermissionOrgan
     {
@@ -17,7 +15,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 
         public ProductPermissionOrgan(string organId, string groupId)
         {
-            Id = GuidGen.NewGUID();
             OrganizationId = organId;
             ProductPermissionGroupId = groupId;
         } 

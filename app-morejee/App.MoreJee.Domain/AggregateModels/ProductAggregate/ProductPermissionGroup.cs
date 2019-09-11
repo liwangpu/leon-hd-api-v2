@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
+﻿using App.MoreJee.Domain.SeedWork;
 using System.Collections.Generic;
 using System.Linq;
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
-    public class ProductPermissionGroup : Entity
+    public class ProductPermissionGroup : Entity, IAggregateRoot
     {
         private readonly List<ProductPermissionItem> _ownProductItems;
         private readonly List<ProductPermissionOrgan> _ownOrganItems;
@@ -21,7 +21,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
         }
         public ProductPermissionGroup(string name, string description, string organizationId)
         {
-            Id = GuidGen.NewGUID();
             Name = name;
             Description = description;
             OrganizationId = organizationId;

@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.MoreJee.Domain.Events.PackageMapEvents;
+﻿using App.MoreJee.Domain.Events.PackageMapEvents;
+using App.MoreJee.Domain.SeedWork;
 
 namespace App.MoreJee.Domain.AggregateModels.ClientAssetAggregate
 {
-    public class PackageMap : Entity
+    public class PackageMap : Entity, IAggregateRoot
     {
         public string Package { get; protected set; }
         public string Dependencies { get; protected set; }
@@ -31,7 +31,6 @@ namespace App.MoreJee.Domain.AggregateModels.ClientAssetAggregate
         public PackageMap(string package, string resourceId, string resourceType)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Package = package;
             ResourceId = resourceId;
             ResourceType = resourceType;

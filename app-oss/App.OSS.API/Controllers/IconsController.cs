@@ -1,7 +1,7 @@
 ﻿using App.Base.API.Infrastructure.Exceptions;
-using App.Base.Domain.Common;
 using App.OSS.API.Infrastructure.Consts;
 using App.OSS.API.Infrastructure.Extensions;
+using App.OSS.Domain;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +56,7 @@ namespace App.OSS.API.Controllers
             }
 
 
-            var md5 = MD5Gen.CalcFile(tmpPath);
+            var md5 = MD5Generator.CalcFile(tmpPath);
             var fileName = $"{md5}.{iconExt}";
             var iconPath = Path.Combine(iconFolder, fileName);
             //如果文件不存在资源文件夹,拷贝存储
@@ -104,7 +104,7 @@ namespace App.OSS.API.Controllers
                 fs.Flush();
             }
 
-            var md5 = MD5Gen.CalcFile(tmpPath);
+            var md5 = MD5Generator.CalcFile(tmpPath);
             var fileName = $"{md5}.{iconExt}";
             var iconPath = Path.Combine(iconFolder, fileName);
             //如果文件不存在资源文件夹,拷贝存储

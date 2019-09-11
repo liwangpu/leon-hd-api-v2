@@ -1,4 +1,4 @@
-﻿using App.Base.Domain.Common;
+﻿using App.MoreJee.Domain.SeedWork;
 using System.Threading.Tasks;
 
 namespace App.MoreJee.Domain.AggregateModels.ClientAssetAggregate

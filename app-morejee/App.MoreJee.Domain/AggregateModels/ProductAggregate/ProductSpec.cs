@@ -1,6 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Extentions;
-using App.MoreJee.Domain.Events.ProductEvents;
+﻿using App.MoreJee.Domain.Events.ProductEvents;
+using App.MoreJee.Domain.SeedWork;
 using System;
 
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
@@ -46,7 +45,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
         public ProductSpec(string name, string description, string productId, string organizationId, string creator, string staticMeshId = null)
             : this()
         {
-            Id = GuidGen.NewGUID();
             Name = name;
             Description = description;
             ProductId = productId;
@@ -68,7 +66,7 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
             ModifiedTime = DateTime.UtcNow.ToUnixTimeSeconds();
         }
 
-        public void UpdateIcon( string icon)
+        public void UpdateIcon(string icon)
         {
             var bIconChange = Icon != icon;
             Icon = icon;

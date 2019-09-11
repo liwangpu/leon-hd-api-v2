@@ -1,10 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Extentions;
+﻿using App.OSS.Domain.SeedWork;
 using System;
 
 namespace App.OSS.Domain.AggregateModels.FileAssetAggregate
 {
-    public class FileAsset : Entity
+    public class FileAsset : Entity, IAggregateRoot
     {
         public string Name { get; protected set; }
         public string Description { get; protected set; }

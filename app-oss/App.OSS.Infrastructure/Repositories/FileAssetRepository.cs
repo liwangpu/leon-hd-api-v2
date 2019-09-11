@@ -1,7 +1,5 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Infrastructure;
-using App.OSS.Domain.AggregateModels.FileAssetAggregate;
-using MediatR;
+﻿using App.OSS.Domain.AggregateModels.FileAssetAggregate;
+using App.OSS.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,21 +44,19 @@ namespace App.OSS.Infrastructure.Repositories
             return queryableResult.Where(specification.Criteria).OrderBy(noOrder ? "modifiedTime" : specification.OrderBy, noOrder ? true : specification.Desc).Skip((specification.Page - 1) * specification.PageSize).Take(specification.PageSize).AsNoTracking();
         }
 
-        public async Task AddAsync(FileAsset entity)
+        public void Add(FileAsset entity)
         {
             _context.Set<FileAsset>().Add(entity);
-            await _context.SaveEntitiesAsync();
         }
 
-        public async Task UpdateAsync(FileAsset entity)
+        public void Update(FileAsset entity)
         {
-            _context.Set<FileAsset>().Update(entity);
-            await _context.SaveEntitiesAsync();
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public Task DeleteAsync(string id, string operatorId)
+        public void Delete(string id, string operatorId)
         {
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
 
     }

@@ -1,8 +1,6 @@
-﻿#pragma warning disable 1591
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using NLog.Web;
 
 namespace App.OSS.API
@@ -24,11 +22,6 @@ namespace App.OSS.API
             return WebHost.CreateDefaultBuilder(args)
                 .UseConfiguration(config)
                 .UseStartup<Startup>()
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(LogLevel.Trace);
-                })
                 .UseNLog()
 #if DEBUG
                 .UseUrls("http://*:5002")

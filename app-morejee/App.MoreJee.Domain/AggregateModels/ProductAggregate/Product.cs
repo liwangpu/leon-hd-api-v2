@@ -1,12 +1,11 @@
-﻿using App.Base.Domain.Common;
-using App.Base.Domain.Extentions;
-using App.MoreJee.Domain.Events.ProductEvents;
+﻿using App.MoreJee.Domain.Events.ProductEvents;
+using App.MoreJee.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 
 namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
 {
-    public class Product : Entity
+    public class Product : Entity, IAggregateRoot
     {
         private readonly List<ProductSpec> _ownProductSpecs;
         public IReadOnlyCollection<ProductSpec> OwnProductSpecs => _ownProductSpecs;
@@ -46,7 +45,6 @@ namespace App.MoreJee.Domain.AggregateModels.ProductAggregate
         public Product(string name, string description, string brand, string unit, string organizationId, string creator, string sourcedStaticMeshId = null)
                : this()
         {
-            Id = GuidGen.NewGUID();
             Name = name;
             Description = description;
             Brand = brand;

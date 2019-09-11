@@ -1,5 +1,4 @@
-﻿#pragma warning disable 1591
-using App.Base.API;
+﻿using App.Base.API;
 using App.Base.API.Infrastructure.Filters;
 using App.Base.API.Infrastructure.Services;
 using App.OSS.API.Infrastructure.AutofacModules;

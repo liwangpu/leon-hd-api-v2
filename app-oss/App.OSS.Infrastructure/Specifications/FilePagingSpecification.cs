@@ -1,9 +1,9 @@
-﻿using App.Base.Domain.Common;
-using App.OSS.Domain.AggregateModels.FileAssetAggregate;
+﻿using App.OSS.Domain.AggregateModels.FileAssetAggregate;
+using App.OSS.Domain.SeedWork;
 
 namespace App.OSS.Infrastructure.Specifications
 {
-    public class FilePagingSpecification : PagingBaseSpecification<FileAsset>
+    public class FilePagingSpecification : PagingSpecification<FileAsset>
     {
         #region ctor
         public FilePagingSpecification(int page, int pageSize, string search, string orderBy, bool desc)
