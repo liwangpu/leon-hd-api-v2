@@ -16,7 +16,7 @@ namespace App.Basic.API.Application.Validations.Users
         {
             this.accountRepository = accountRepository;
 
-            RuleFor(cmd => cmd.FistName).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(localizer["FieldIsRequred", "Fist Name"]);
+            RuleFor(cmd => cmd.FirstName).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(localizer["FieldIsRequred", "First Name"]);
             RuleFor(cmd => cmd.LastName).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(localizer["FieldIsRequred", "Last Name"]);
             RuleFor(cmd => cmd.Mail).Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(localizer["FieldIsRequred", "Mail"]);
             RuleFor(x => x.Mail).Must(MustBeUniqueEmail).WithMessage(x => localizer["MailHasBeenUsed", x.Mail]);

@@ -20,7 +20,7 @@ namespace App.Basic.API.Application.Commands.Accounts
 
         public async Task<string> Handle(AccountCreateCommand request, CancellationToken cancellationToken)
         {
-            var account = new Account(request.FistName, request.LastName, request.Password, request.Mail, request.Phone, SystemRole.NormalUser.Id, _identityService.GetOrganizationId(), _identityService.GetUserId());
+            var account = new Account(request.FirstName, request.LastName, request.Password, request.Mail, request.Phone, SystemRole.NormalUser.Id, _identityService.GetOrganizationId(), _identityService.GetUserId());
             await _accountRepository.AddAsync(account);
             return account.Id;
         }
