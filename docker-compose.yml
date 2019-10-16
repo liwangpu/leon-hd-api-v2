@@ -30,7 +30,7 @@ services:
 # 1.3 APIGateway
   app-infrastructure-apigateway:
     container_name: app-infrastructure-apigateway-c
-    image: app-infrastructure-apigateway:latest
+    image: registry.cn-qingdao.aliyuncs.com/leon-pu/app-infrastructure-apigateway:latest
     build:
       context: .
       dockerfile: app-infrastructure/App.Infrastructure.APIGateway/Dockerfile
@@ -49,7 +49,7 @@ services:
 # 2.1 basic ms
   app-microservice-basic:
     container_name: app-microservice-basic-c
-    image: app-microservice-basic:latest
+    image: registry.cn-qingdao.aliyuncs.com/leon-pu/app-microservice-basic:latest
     build:
       context: .
       dockerfile: app-basic/App.Basic.API/Dockerfile
@@ -88,7 +88,7 @@ services:
 # 2.2 oss ms
   app-microservice-oss:
     container_name: app-microservice-oss-c
-    image: app-microservice-oss:latest
+    image: registry.cn-qingdao.aliyuncs.com/leon-pu/app-microservice-oss:latest
     build:
       context: .
       dockerfile: app-oss/App.OSS.API/Dockerfile
@@ -124,7 +124,7 @@ services:
 # 2.3 morejee ms
   app-microservice-morejee:
     container_name: app-microservice-morejee-c
-    image: app-microservice-morejee:latest
+    image: registry.cn-qingdao.aliyuncs.com/leon-pu/app-microservice-morejee:latest
     build:
       context: .
       dockerfile: app-morejee/App.MoreJee.API/Dockerfile
@@ -161,7 +161,7 @@ services:
 #2.4 oms ms
   app-microservice-oms:
     container_name: app-microservice-oms-c
-    image: app-microservice-oms:latest
+    image: registry.cn-qingdao.aliyuncs.com/leon-pu/app-microservice-oms:latest
     build: 
       context: .
       dockerfile: app-oms/App.OMS.API/Dockerfile
